@@ -29,7 +29,7 @@ public class BulkInsertTest {
 
         var stopWatch = new StopWatch();
         stopWatch.start();
-        List<Article> articles = IntStream.range(0, 100000)
+        List<Article> articles = IntStream.range(0, 1000000)
             .parallel()
             .mapToObj(i -> articleBuilder.nextObject(Article.class))
             .collect(Collectors.toList());

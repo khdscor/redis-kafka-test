@@ -12,9 +12,9 @@
     </foreach>
   </insert>
   <select id="findArticlesInPage" resultType="Article">
-    SELECT id, title, content, create_date as createDate, member_id as memberId
-    FROM article WHERE member_id = #{memberId}
-    ORDER BY ${orderBy}
-    limit #{size} offset #{offset}
+    SELECT a.id, a.title, a.content, a.create_date as createDate, a.member_id as memberId
+    FROM (select id from article WHERE member_id = #{memberId}
+    ORDER BY ${orderBy} limit #{size} offset #{offset}) b
+    join article a on a.id = b.id;
   </select>
 </mapper>

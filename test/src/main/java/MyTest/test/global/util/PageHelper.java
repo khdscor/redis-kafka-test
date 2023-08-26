@@ -14,7 +14,6 @@ public class PageHelper {
             .map(order -> order.getProperty() + " " + order.getDirection())
             .collect(Collectors.toList());
         String test = String.join(", ", sorted);
-        System.out.println(test);
         return test;
     }
 }
