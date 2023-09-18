@@ -16,3 +16,7 @@ spring:
 mybatis:
   mapper-locations: mapper/**/*.xml
   type-aliases-package: MyTest.test.domain
+
+  redis:
+    host: localhost
+    port: 6379
