@@ -30,6 +30,7 @@ dependencies {
 	implementation 'junit:junit:4.13.1'
 	implementation 'org.jeasy:easy-random-core:4.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.session:spring-session-data-redis'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
