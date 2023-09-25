@@ -2,6 +2,7 @@ package MyTest.test.domain.article.api;
 
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,5 +44,12 @@ public class TestRedisController {
         ops.set("key:" + userId, name, 20, TimeUnit.SECONDS);
         System.out.println("데이터베이스에서 기록된 정보를 빼옴.");
         return name;
+    }
+
+    @GetMapping("/getUser/spring/{userId}")
+    @Cacheable(cacheNames = "testCache", key = "#userId")
+    public String getUserProfileBySpringCache(@PathVariable("userId") String userId) {
+        System.out.println("데이터베이스에 접근");
+        return "사용자 이름입니다.";
     }
 }
