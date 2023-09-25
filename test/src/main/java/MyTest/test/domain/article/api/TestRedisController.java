@@ -1,8 +1,10 @@
 package MyTest.test.domain.article.api;
 
+import MyTest.test.domain.article.dto.TestRedisDto;
+import MyTest.test.domain.article.service.TestRedisService;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,9 @@ public class TestRedisController {
 
     @Autowired
     StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private TestRedisService testRedisService;
 
     @GetMapping("/setFruit")
     public String setFruit(@RequestParam String name) {
@@ -47,9 +52,14 @@ public class TestRedisController {
     }
 
     @GetMapping("/getUser/spring/{userId}")
-    @Cacheable(cacheNames = "testCache", key = "#userId")
-    public String getUserProfileBySpringCache(@PathVariable("userId") String userId) {
-        System.out.println("데이터베이스에 접근");
-        return "사용자 이름입니다.";
+    public TestRedisDto getUserProfileBySpringCache(@PathVariable("userId") String userId) {
+
+        return testRedisService.testObjectInRedis(userId);
+    }
+
+    @GetMapping("/getUser/spring/many/{userId}")
+    public List<TestRedisDto> getUsersProfileBySpringCache(@PathVariable("userId") String userId) {
+
+        return testRedisService.testObjectListInRedis(userId);
     }
 }

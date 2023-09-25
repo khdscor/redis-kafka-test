@@ -19,7 +19,7 @@ public class RedisCashConfig {
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
             .disableCachingNullValues()
-            .entryTtl(Duration.ofSeconds(5))
+            .entryTtl(Duration.ofSeconds(500))
             .computePrefixWith(CacheKeyPrefix.simple())
             .serializeKeysWith(
                 RedisSerializationContext.SerializationPair.fromSerializer(
@@ -31,7 +31,7 @@ public class RedisCashConfig {
             );
 
         HashMap<String, RedisCacheConfiguration> configMap = new HashMap<>();
-        configMap.put("testCache", RedisCacheConfiguration.defaultCacheConfig()
+        configMap.put("tfstCache", RedisCacheConfiguration.defaultCacheConfig()
             .entryTtl(Duration.ofSeconds(100)));
 
         return RedisCacheManager
