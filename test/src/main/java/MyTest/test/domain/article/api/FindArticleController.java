@@ -38,5 +38,4 @@ public class FindArticleController {
     public ResponseEntity<Slice<Article>> findArticlesByMyBatis(@PathVariable("page") int page) {
         return ResponseEntity.ok().body(findArticleService.findArticlePageByMaBatis(page, 1L));
     }
-
 }
