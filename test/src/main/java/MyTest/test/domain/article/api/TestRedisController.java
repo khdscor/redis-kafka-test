@@ -2,10 +2,6 @@ package MyTest.test.domain.article.api;
 
 import MyTest.test.domain.article.dto.TestRedisDto;
 import MyTest.test.domain.article.service.TestRedisService;
-import MyTest.test.global.util.ObjectSerializer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -57,17 +53,6 @@ public class TestRedisController {
     @GetMapping("/getUser/spring/{userId}")
     public TestRedisDto getUserProfileBySpringCache(@PathVariable("userId") String userId) {
 
-        String value = testRedisService.testObjectInRedis(userId);
-        TestRedisDto dto = ObjectSerializer.ToObject(value, TestRedisDto.class)
-            .orElseThrow(() -> new RuntimeException("테스트입니다."));
-        return dto;
-    }
-
-    @GetMapping("/getUser/spring/many/{userId}")
-    public List<TestRedisDto> getUsersProfileBySpringCache(@PathVariable("userId") String userId) {
-        String value = testRedisService.testObjectListInRedis(userId);
-        List<TestRedisDto> dto = ObjectSerializer.ToObject(value, List.class)
-            .orElseThrow(() -> new RuntimeException("테스트입니다."));
-        return dto;
+        return testRedisService.testObjectInRedis(userId);
     }
 }
