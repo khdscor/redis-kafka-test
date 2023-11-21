@@ -22,6 +22,6 @@ public class TestEntity {
 
     private String title;
 
-    @Convert(converter = StringListConverter.class)
+    @ElementCollection(fetch = FetchType.LAZY)
     private List<String> columns;
 }
