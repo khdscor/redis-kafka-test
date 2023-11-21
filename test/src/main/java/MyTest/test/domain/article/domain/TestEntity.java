@@ -1,11 +1,19 @@
 package MyTest.test.domain.article.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import MyTest.test.global.util.StringListConverter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TestEntity {
 
     @Id
@@ -14,5 +22,6 @@ public class TestEntity {
 
     private String title;
 
-    private String content;
+    @Convert(converter = StringListConverter.class)
+    private List<String> columns;
 }
