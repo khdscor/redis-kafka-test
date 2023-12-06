@@ -1,5 +1,6 @@
 package MyTest.test.kafka.controller;
 
+import MyTest.test.kafka.dto.TestMessage;
 import MyTest.test.kafka.service.KafkaProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,5 +16,11 @@ public class KafkaProducerController {
     public String publish(String message) {
         kafkaProducerService.send(message);
         return "succeed!";
+    }
+
+    @GetMapping("/publishJson")
+    public String publish(TestMessage message) {
+        kafkaProducerService.sendJson(message);
+        return "succeed2!";
     }
 }
